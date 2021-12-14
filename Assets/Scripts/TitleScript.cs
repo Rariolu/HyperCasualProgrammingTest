@@ -10,11 +10,6 @@ public class TitleScript : MonoBehaviour
 
     [SerializeField]
     Button btnQuit;
-
-    [SerializeField]
-    //The amount of seconds to wait between the quit button is pressed
-    //and actually exiting the program.
-    float quitDelay = 0.25f;
     
     void Start()
     {
@@ -51,7 +46,7 @@ public class TitleScript : MonoBehaviour
     /// <returns></returns>
     IEnumerator Quit()
     {
-        yield return new WaitForSeconds(quitDelay);
+        yield return 0;
         Util.Quit();
     }
 }
