@@ -6,6 +6,16 @@ using UnityEditor;
 public static class Util
 {
     /// <summary>
+    /// Show the "Loading" scene as a buffer while the desired scene loads.
+    /// </summary>
+    /// <param name="scene"></param>
+    public static void LoadSceneWithLoading(SCENE scene)
+    {
+        LoadScene(SCENE.LOADING, LoadSceneMode.Additive);
+        LoadScene(scene);
+    }
+
+    /// <summary>
     /// Load a given scene either to replace the one that's currently loaded (LoadSceneMode.Single) or co-exist with it (LoadSceneMode.Additive).
     /// </summary>
     /// <param name="scene">An enum representing the build index of the chosen scene.</param>
