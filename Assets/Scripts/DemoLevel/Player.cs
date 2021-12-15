@@ -23,6 +23,17 @@ namespace DemoLevel
         [SerializeField]
         float baselineSpeed = 10f;
 
+        [SerializeField]
+        Vector2 initialDirection = Vector2.left;
+
+        Vector2 currentDirection;
+
+        [SerializeField]
+        float slowdownReturnDelay = 1f;
+
+        [SerializeField]
+        float slowdownPercentage = 0.6f;
+
         float speed;
 
         [SerializeField]
@@ -41,6 +52,8 @@ namespace DemoLevel
         void Start()
         {
             speed = baselineSpeed;
+            RigidBody.velocity = initialDirection * speed;
+            currentDirection = initialDirection;
         }
 
         // Update is called once per frame
@@ -57,7 +70,32 @@ namespace DemoLevel
             if (Input.GetKey(keyCode))
             {
                 RigidBody.velocity = dir * speed;
+                currentDirection = dir;
             }
+        }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.gameObject.GameObjectIs(TAG.WALL))
+            {
+                currentDirection *= -1f;
+                StartCoroutine(SlowDown());
+            }
+        }
+
+        IEnumerator SlowDown()
+        {
+            speed *= slowdownPercentage;
+            float slowedSpeed = speed;
+            float t = 0;
+            while (t < slowdownReturnDelay)
+            {
+                RigidBody.velocity = currentDirection * speed;
+                t += Time.deltaTime;
+                speed = Mathf.Lerp(slowedSpeed, baselineSpeed, t / slowdownReturnDelay);
+                yield return 0;
+            }
+            speed = baselineSpeed;
         }
     }
 }
