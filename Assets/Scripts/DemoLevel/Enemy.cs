@@ -33,6 +33,7 @@ namespace DemoLevel
 
                 while (Vector3.Distance(currentPosition, targetPosition) > 1f && t < targetRetrieveInterval)
                 {
+                    t += Time.deltaTime;
                     transform.position = Vector3.Lerp(currentPosition, targetPosition, t / targetRetrieveInterval);
                     yield return 0;
                 }
