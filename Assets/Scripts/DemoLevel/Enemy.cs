@@ -13,7 +13,7 @@ namespace DemoLevel
 
         IEnumerator Chase()
         {
-            while(chasing)
+            //while(chasing)
             {
                 MapNode target = CurrentMapNode;
                 Player player;
@@ -22,24 +22,47 @@ namespace DemoLevel
                     target = player.CurrentMapNode;
                 }
 
-                Vector3 currentPosition = transform.position;
-                Vector3 targetPosition = target != null ? target.transform.position : currentPosition;
-
-                float t = 0;
-
-
-                while (Vector3.Distance(currentPosition, targetPosition) > 1f && t < targetRetrieveInterval)
+                Map map;
+                if (Map.InstanceAvailable(out map))
                 {
-                    t += Time.deltaTime;
-                    transform.position = Vector3.Lerp(currentPosition, targetPosition, t / targetRetrieveInterval);
-                    yield return 0;
+                    List<MapNode> path = map.GetPath(CurrentMapNode, target);
+
+                    foreach(MapNode node in path)
+                    {
+                        Vector3 currentPosition = transform.position;
+                        Vector3 targetPosition = node.transform.position;
+
+                        float t = 0;
+                        float duration = 1f;
+
+                        while (t < duration)
+                        {
+                            t += Time.deltaTime;
+                            transform.position = Vector3.Lerp(currentPosition, targetPosition, t / duration);
+                            yield return 0;
+                        }
+                    }
                 }
+
+                //Vector3 currentPosition = transform.position;
+                //Vector3 targetPosition = target != null ? target.transform.position : currentPosition;
+
+                //float t = 0;
+
+
+                //while (Vector3.Distance(currentPosition, targetPosition) > 1f)// && t < targetRetrieveInterval)
+                //{
+                //    t += Time.deltaTime;
+                //    transform.position = Vector3.Lerp(currentPosition, targetPosition, t / targetRetrieveInterval);
+                //    yield return 0;
+                //}
             }
         }
 
         // Start is called before the first frame update
         protected override void Start()
         {
+            base.Start();
             StartCoroutine(Chase());
         }
 
