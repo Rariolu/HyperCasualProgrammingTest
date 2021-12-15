@@ -9,3 +9,9 @@ public enum SCENE
     GAME = 2,
     END = 3
 }
+
+public enum TAG
+{
+    PLAYER,
+    WALL
+}
