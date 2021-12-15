@@ -19,6 +19,8 @@ namespace DemoLevel
                 return body;
             }
         }
+        bool alreadySlowingDown = false;
+        float slowdownTimer = 0f;
 
         [SerializeField]
         float baselineSpeed = 10f;
@@ -85,17 +87,27 @@ namespace DemoLevel
 
         IEnumerator SlowDown()
         {
-            speed *= slowdownPercentage;
-            float slowedSpeed = speed;
-            float t = 0;
-            while (t < slowdownReturnDelay)
+            if (alreadySlowingDown)
             {
-                RigidBody.velocity = currentDirection * speed;
-                t += Time.deltaTime;
-                speed = Mathf.Lerp(slowedSpeed, baselineSpeed, t / slowdownReturnDelay);
-                yield return 0;
+                slowdownTimer = 0f;
+                speed = baselineSpeed * slowdownPercentage;
             }
-            speed = baselineSpeed;
+            else
+            {
+                alreadySlowingDown = true;
+                speed = baselineSpeed * slowdownPercentage;
+                float slowedSpeed = speed;
+                slowdownTimer = 0f;
+                while (slowdownTimer < slowdownReturnDelay)
+                {
+                    RigidBody.velocity = currentDirection * speed;
+                    slowdownTimer += Time.deltaTime;
+                    speed = Mathf.Lerp(slowedSpeed, baselineSpeed, slowdownTimer / slowdownReturnDelay);
+                    yield return 0;
+                }
+                speed = baselineSpeed;
+                alreadySlowingDown = false;
+            }
         }
     }
 }
