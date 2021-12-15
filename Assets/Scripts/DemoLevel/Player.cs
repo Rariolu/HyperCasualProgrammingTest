@@ -5,8 +5,22 @@ using UnityEngine;
 namespace DemoLevel
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class Player : MonoBehaviour
+    public class Player : MapObject
     {
+        #region SingletonSetup
+        static Player instance;
+        public static bool InstanceAvailable(out Player player)
+        {
+            player = instance;
+            return instance != null;
+        }
+
+        private void Awake()
+        {
+            instance = this;
+        }
+        #endregion
+
         Rigidbody2D body;
         Rigidbody2D RigidBody
         {
@@ -51,8 +65,9 @@ namespace DemoLevel
         KeyCode upKey = KeyCode.W;
 
         // Start is called before the first frame update
-        void Start()
+        protected override void Start()
         {
+            base.Start();
             speed = baselineSpeed;
             RigidBody.velocity = initialDirection * speed;
             currentDirection = initialDirection;
@@ -76,8 +91,9 @@ namespace DemoLevel
             }
         }
 
-        private void OnCollisionEnter2D(Collision2D collision)
+        protected override void OnCollisionEnter2D(Collision2D collision)
         {
+            base.OnCollisionEnter2D(collision);
             if (collision.gameObject.GameObjectIs(TAG.WALL))
             {
                 currentDirection *= -1f;
