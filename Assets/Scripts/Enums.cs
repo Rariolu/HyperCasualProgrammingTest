@@ -13,5 +13,6 @@ public enum SCENE
 public enum TAG
 {
     PLAYER,
-    WALL
+    WALL,
+    NODE
 }
