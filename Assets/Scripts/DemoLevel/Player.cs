@@ -15,8 +15,9 @@ namespace DemoLevel
             return instance != null;
         }
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             instance = this;
         }
         #endregion
