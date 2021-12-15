@@ -21,12 +21,25 @@ namespace DemoLevel
         {
             if (collision.gameObject.GameObjectIs(TAG.NODE))
             {
-                MapNode newNode = collision.gameObject.GetComponent<MapNode>();
-                if (newNode != null)
-                {
-                    currentNode = newNode;
-                    Debug.Log("Current node changed");
-                }
+                NodeHit(collision.gameObject);
+            }
+        }
+
+        protected virtual void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.gameObject.GameObjectIs(TAG.NODE))
+            {
+                NodeHit(collision.gameObject);
+            }
+        }
+
+        void NodeHit(GameObject obj)
+        {
+            MapNode newNode = obj.GetComponent<MapNode>();
+            if (newNode != null)
+            {
+                currentNode = newNode;
+                Debug.Log("Current node changed.");
             }
         }
 
