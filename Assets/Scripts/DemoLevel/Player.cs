@@ -101,6 +101,7 @@ namespace DemoLevel
                     yield return 0;
                 }
                 speed = baselineSpeed;
+                RigidBody.velocity = currentDirection * speed;
                 alreadySlowingDown = false;
             }
         }
