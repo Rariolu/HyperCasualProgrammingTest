@@ -9,16 +9,13 @@ namespace DemoLevel
         bool chasing = true;
 
         [SerializeField]
-        MapNode currentNode;
-
-        [SerializeField]
         float targetRetrieveInterval = 2f;
 
         IEnumerator Chase()
         {
             while(chasing)
             {
-                MapNode target = currentNode;
+                MapNode target = CurrentMapNode;
                 Player player;
                 if (Player.InstanceAvailable(out player))
                 {
