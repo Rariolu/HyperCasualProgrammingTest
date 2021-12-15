@@ -87,17 +87,12 @@ namespace DemoLevel
 
         IEnumerator SlowDown()
         {
-            if (alreadySlowingDown)
-            {
-                slowdownTimer = 0f;
-                speed = baselineSpeed * slowdownPercentage;
-            }
-            else
+            slowdownTimer = 0f;
+            speed = baselineSpeed * slowdownPercentage;
+            if (!alreadySlowingDown)
             {
                 alreadySlowingDown = true;
-                speed = baselineSpeed * slowdownPercentage;
                 float slowedSpeed = speed;
-                slowdownTimer = 0f;
                 while (slowdownTimer < slowdownReturnDelay)
                 {
                     RigidBody.velocity = currentDirection * speed;
