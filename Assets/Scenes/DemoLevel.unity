@@ -762,9 +762,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6e8e3a007d1de64aa3943e0a069dcb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baselineSpeed: 10
-  initialDirection: {x: -1, y: 0}
-  slowdownReturnDelay: 10
+  baselineSpeed: 30
+  initialDirection: {x: 0, y: -1}
+  slowdownReturnDelay: 5
   slowdownPercentage: 0.1
   downKey: 115
   leftKey: 97
