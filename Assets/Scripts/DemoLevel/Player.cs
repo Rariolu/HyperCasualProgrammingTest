@@ -72,15 +72,35 @@ namespace DemoLevel
             speed = baselineSpeed;
             RigidBody.velocity = initialDirection * speed;
             currentDirection = initialDirection;
+
+            UIManager uiManager;
+            if (UIManager.InstanceAvailable(out uiManager))
+            {
+                uiManager.DirectionButtonPressed += DirectionButtonPressed;
+            }
+        }
+
+        Dictionary<DIR, Vector2> directionVectors = new Dictionary<DIR, Vector2>()
+        {
+            {DIR.DOWN, Vector2.down},
+            {DIR.LEFT, Vector2.left},
+            {DIR.RIGHT, Vector2.right},
+            {DIR.UP, Vector2.up}
+        };
+
+        void DirectionButtonPressed(DIR dir)
+        {
+            RigidBody.velocity = directionVectors[dir] * speed;
+            currentDirection = directionVectors[dir];
         }
 
         // Update is called once per frame
         void Update()
         {
-            CheckDirPress(downKey, Vector2.down);
-            CheckDirPress(leftKey, Vector2.left);
-            CheckDirPress(rightKey, Vector2.right);
-            CheckDirPress(upKey, Vector2.up);
+            //CheckDirPress(downKey, Vector2.down);
+            //CheckDirPress(leftKey, Vector2.left);
+            //CheckDirPress(rightKey, Vector2.right);
+            //CheckDirPress(upKey, Vector2.up);
         }
 
         void CheckDirPress(KeyCode keyCode, Vector2 dir)
