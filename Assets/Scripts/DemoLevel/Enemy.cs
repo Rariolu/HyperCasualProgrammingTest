@@ -13,7 +13,7 @@ namespace DemoLevel
 
         IEnumerator Chase()
         {
-            //while(chasing)
+            while(chasing)
             {
                 MapNode target = CurrentMapNode;
                 Player player;
@@ -27,8 +27,11 @@ namespace DemoLevel
                 {
                     List<MapNode> path = map.GetPath(CurrentMapNode, target);
 
-                    foreach(MapNode node in path)
+                    float chaseTime = 0f;
+
+                    for (int i = 0; i < path.Count && chaseTime < targetRetrieveInterval; i++)//each(MapNode node in path)
                     {
+                        MapNode node = path[i];
                         Vector3 currentPosition = transform.position;
                         Vector3 targetPosition = node.transform.position;
 
@@ -38,6 +41,7 @@ namespace DemoLevel
                         while (t < duration)
                         {
                             t += Time.deltaTime;
+                            chaseTime += Time.deltaTime;
                             transform.position = Vector3.Lerp(currentPosition, targetPosition, t / duration);
                             yield return 0;
                         }
