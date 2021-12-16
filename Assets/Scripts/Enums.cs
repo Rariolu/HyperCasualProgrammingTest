@@ -16,3 +16,14 @@ public enum TAG
     WALL,
     NODE
 }
+
+namespace DemoLevel
+{
+    public enum DIR
+    {
+        DOWN,
+        LEFT,
+        RIGHT,
+        UP
+    }
+}
