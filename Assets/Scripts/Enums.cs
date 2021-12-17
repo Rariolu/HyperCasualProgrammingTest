@@ -14,7 +14,8 @@ public enum TAG
 {
     PLAYER,
     WALL,
-    NODE
+    NODE,
+    PICKUP
 }
 
 namespace DemoLevel
