@@ -38,6 +38,9 @@ namespace DemoLevel
         [SerializeField]
         Button btnUp;
 
+        [SerializeField]
+        Text lblCoins;
+
         public DirectionButtonPressed DirectionButtonPressed;
 
         void SetDirectionButtonClick(Button button, DIR dir)
@@ -53,6 +56,11 @@ namespace DemoLevel
             {
                 Debug.LogFormat("Button for direction {0} is null.", dir);
             }
+        }
+
+        public void SetCoins(uint coins)
+        {
+            lblCoins.text = string.Format("Coins: {0}", coins);
         }
 
         // Start is called before the first frame update
