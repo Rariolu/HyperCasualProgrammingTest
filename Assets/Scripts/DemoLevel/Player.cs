@@ -35,6 +35,15 @@ namespace DemoLevel
             }
         }
         bool alreadySlowingDown = false;
+
+        Dictionary<DIR, Vector2> directionVectors = new Dictionary<DIR, Vector2>()
+        {
+            {DIR.DOWN, Vector2.down},
+            {DIR.LEFT, Vector2.left},
+            {DIR.RIGHT, Vector2.right},
+            {DIR.UP, Vector2.up}
+        };
+
         float slowdownTimer = 0f;
 
         [SerializeField]
@@ -65,42 +74,22 @@ namespace DemoLevel
         [SerializeField]
         KeyCode upKey = KeyCode.W;
 
-        // Start is called before the first frame update
-        protected override void Start()
+        uint coins;
+        uint Coins
         {
-            base.Start();
-            speed = baselineSpeed;
-            RigidBody.velocity = initialDirection * speed;
-            currentDirection = initialDirection;
-
-            UIManager uiManager;
-            if (UIManager.InstanceAvailable(out uiManager))
+            get
             {
-                uiManager.DirectionButtonPressed += DirectionButtonPressed;
+                return coins;
             }
-        }
-
-        Dictionary<DIR, Vector2> directionVectors = new Dictionary<DIR, Vector2>()
-        {
-            {DIR.DOWN, Vector2.down},
-            {DIR.LEFT, Vector2.left},
-            {DIR.RIGHT, Vector2.right},
-            {DIR.UP, Vector2.up}
-        };
-
-        void DirectionButtonPressed(DIR dir)
-        {
-            RigidBody.velocity = directionVectors[dir] * speed;
-            currentDirection = directionVectors[dir];
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-            //CheckDirPress(downKey, Vector2.down);
-            //CheckDirPress(leftKey, Vector2.left);
-            //CheckDirPress(rightKey, Vector2.right);
-            //CheckDirPress(upKey, Vector2.up);
+            set
+            {
+                coins = value;
+                UIManager uiManager;
+                if (UIManager.InstanceAvailable(out uiManager))
+                {
+                    uiManager.SetCoins(coins);
+                }
+            }
         }
 
         void CheckDirPress(KeyCode keyCode, Vector2 dir)
@@ -112,6 +101,13 @@ namespace DemoLevel
             }
         }
 
+        void DirectionButtonPressed(DIR dir)
+        {
+            RigidBody.velocity = directionVectors[dir] * speed;
+            currentDirection = directionVectors[dir];
+        }
+
+
         protected override void OnCollisionEnter2D(Collision2D collision)
         {
             base.OnCollisionEnter2D(collision);
@@ -119,6 +115,27 @@ namespace DemoLevel
             {
                 currentDirection *= -1f;
                 StartCoroutine(SlowDown());
+            }
+        }
+
+        protected override void OnTriggerEnter2D(Collider2D collision)
+        {
+            base.OnTriggerEnter2D(collision);
+            if (collision.gameObject.GameObjectIs(TAG.PICKUP))
+            {
+                Pickup pickupScript = collision.GetComponent<Pickup>();
+                if (pickupScript != null)
+                {
+                    switch(pickupScript.ItemType)
+                    {
+                        case Pickup.PICKUP_ITEM.COIN:
+                        {
+                            Coins++;
+                            break;
+                        }
+                    }
+                    pickupScript.PickedUp();
+                }
             }
         }
 
@@ -141,6 +158,30 @@ namespace DemoLevel
                 RigidBody.velocity = currentDirection * speed;
                 alreadySlowingDown = false;
             }
+        }
+
+        // Start is called before the first frame update
+        protected override void Start()
+        {
+            base.Start();
+            speed = baselineSpeed;
+            RigidBody.velocity = initialDirection * speed;
+            currentDirection = initialDirection;
+
+            UIManager uiManager;
+            if (UIManager.InstanceAvailable(out uiManager))
+            {
+                uiManager.DirectionButtonPressed += DirectionButtonPressed;
+            }
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            //CheckDirPress(downKey, Vector2.down);
+            //CheckDirPress(leftKey, Vector2.left);
+            //CheckDirPress(rightKey, Vector2.right);
+            //CheckDirPress(upKey, Vector2.up);
         }
     }
 }
