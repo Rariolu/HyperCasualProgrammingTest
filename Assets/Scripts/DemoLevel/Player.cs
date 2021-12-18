@@ -174,20 +174,28 @@ namespace DemoLevel
                             SpeedBursts++;
                             break;
                         }
+                        case Pickup.PICKUP_ITEM.AVOIDED:
+                        {
+                            StartCoroutine(SlowDown(true));
+                            break;
+                        }
                     }
                     pickupScript.PickedUp();
                 }
             }
         }
 
-        IEnumerator SlowDown()
+        float slowedSpeed;
+
+        IEnumerator SlowDown(bool extra = false)
         {
             slowdownTimer = 0f;
-            Speed = baselineSpeed * slowdownPercentage;
+            float mult = extra ? 0.25f : 1f;
+            Speed = baselineSpeed * slowdownPercentage * mult;
             if (!alreadySlowingDown)
             {
                 alreadySlowingDown = true;
-                float slowedSpeed = speed;
+                slowedSpeed = speed;
                 while (slowdownTimer < slowdownReturnDelay && alreadySlowingDown)
                 {
                     //RigidBody.velocity = currentDirection * speed;
