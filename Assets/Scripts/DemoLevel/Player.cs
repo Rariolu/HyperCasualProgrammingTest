@@ -61,6 +61,21 @@ namespace DemoLevel
         float slowdownPercentage = 0.6f;
 
         float speed;
+        float Speed
+        {
+            get
+            {
+                return speed;
+            }
+            set
+            {
+                speed = value;
+                RigidBody.velocity = currentDirection * speed;
+            }
+        }
+
+        [SerializeField]
+        float speedUpDuration = 1f;
 
         [SerializeField]
         KeyCode downKey = KeyCode.S;
@@ -88,6 +103,24 @@ namespace DemoLevel
                 if (UIManager.InstanceAvailable(out uiManager))
                 {
                     uiManager.SetCoins(coins);
+                }
+            }
+        }
+
+        uint speedBursts;
+        uint SpeedBursts
+        {
+            get
+            {
+                return speedBursts;
+            }
+            set
+            {
+                speedBursts = value;
+                UIManager uIManager;
+                if (UIManager.InstanceAvailable(out uIManager))
+                {
+                    uIManager.SetSpeedBursts(speedBursts);
                 }
             }
         }
@@ -133,6 +166,11 @@ namespace DemoLevel
                             Coins++;
                             break;
                         }
+                        case Pickup.PICKUP_ITEM.SPEED_BURST:
+                        {
+                            SpeedBursts++;
+                            break;
+                        }
                     }
                     pickupScript.PickedUp();
                 }
@@ -142,21 +180,40 @@ namespace DemoLevel
         IEnumerator SlowDown()
         {
             slowdownTimer = 0f;
-            speed = baselineSpeed * slowdownPercentage;
+            Speed = baselineSpeed * slowdownPercentage;
             if (!alreadySlowingDown)
             {
                 alreadySlowingDown = true;
                 float slowedSpeed = speed;
-                while (slowdownTimer < slowdownReturnDelay)
+                while (slowdownTimer < slowdownReturnDelay && alreadySlowingDown)
                 {
-                    RigidBody.velocity = currentDirection * speed;
+                    //RigidBody.velocity = currentDirection * speed;
                     slowdownTimer += Time.deltaTime;
-                    speed = Mathf.Lerp(slowedSpeed, baselineSpeed, slowdownTimer / slowdownReturnDelay);
+                    Speed = Mathf.Lerp(slowedSpeed, baselineSpeed, slowdownTimer / slowdownReturnDelay);
                     yield return 0;
                 }
-                speed = baselineSpeed;
-                RigidBody.velocity = currentDirection * speed;
+                Speed = baselineSpeed;
+                //RigidBody.velocity = currentDirection * speed;
                 alreadySlowingDown = false;
+            }
+        }
+
+        bool canSpeedUp = true;
+
+        IEnumerator SpeedUp()
+        {
+            if (canSpeedUp)
+            {
+                alreadySlowingDown = false;
+                canSpeedUp = false;
+
+                Speed = baselineSpeed * 1.5f;
+
+                yield return new WaitForSeconds(speedUpDuration);
+
+                Speed = baselineSpeed;
+
+                canSpeedUp = true;
             }
         }
 
@@ -173,6 +230,12 @@ namespace DemoLevel
             {
                 uiManager.DirectionButtonPressed += DirectionButtonPressed;
             }
+        }
+
+        public void UseBurst()
+        {
+            SpeedBursts--;
+            StartCoroutine(SpeedUp());
         }
 
         // Update is called once per frame

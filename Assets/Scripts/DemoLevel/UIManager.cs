@@ -27,6 +27,9 @@ namespace DemoLevel
         #endregion
 
         [SerializeField]
+        Button btnBurst;
+
+        [SerializeField]
         Button btnDown;
 
         [SerializeField]
@@ -40,6 +43,9 @@ namespace DemoLevel
 
         [SerializeField]
         Text lblCoins;
+
+        [SerializeField]
+        Text lblSpeedBursts;
 
         public DirectionButtonPressed DirectionButtonPressed;
 
@@ -63,10 +69,22 @@ namespace DemoLevel
             lblCoins.text = string.Format("Coins: {0}", coins);
         }
 
+        public void SetSpeedBursts(uint speedBursts)
+        {
+            lblSpeedBursts.text = string.Format("Speed Bursts: {0};", speedBursts);
+        }
+
         // Start is called before the first frame update
         void Start()
         {
-
+            Player player;
+            if (Player.InstanceAvailable(out player))
+            {
+                if (btnBurst != null)
+                {
+                    btnBurst.onClick.AddListener(() => { player.UseBurst(); });
+                }
+            }
         }
 
         // Update is called once per frame
