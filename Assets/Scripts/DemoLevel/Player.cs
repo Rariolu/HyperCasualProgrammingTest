@@ -71,6 +71,7 @@ namespace DemoLevel
             {
                 speed = value;
                 RigidBody.velocity = currentDirection * speed;
+                Debug.LogFormat("Speed: {0};", Speed);
             }
         }
 
@@ -99,8 +100,7 @@ namespace DemoLevel
             set
             {
                 coins = value;
-                UIManager uiManager;
-                if (UIManager.InstanceAvailable(out uiManager))
+                if (UIManager.InstanceAvailable(out UIManager uiManager))
                 {
                     uiManager.SetCoins(coins);
                 }
@@ -117,8 +117,7 @@ namespace DemoLevel
             set
             {
                 speedBursts = value;
-                UIManager uIManager;
-                if (UIManager.InstanceAvailable(out uIManager))
+                if (UIManager.InstanceAvailable(out UIManager uIManager))
                 {
                     uIManager.SetSpeedBursts(speedBursts);
                 }
@@ -148,6 +147,10 @@ namespace DemoLevel
             {
                 currentDirection *= -1f;
                 StartCoroutine(SlowDown());
+            }
+            else if (collision.gameObject.GameObjectIs(TAG.ENEMY))
+            {
+                GameStats.Instance.EndState = END_STATE.LOSE;
             }
         }
 
@@ -225,8 +228,7 @@ namespace DemoLevel
             RigidBody.velocity = initialDirection * speed;
             currentDirection = initialDirection;
 
-            UIManager uiManager;
-            if (UIManager.InstanceAvailable(out uiManager))
+            if (UIManager.InstanceAvailable(out UIManager uiManager))
             {
                 uiManager.DirectionButtonPressed += DirectionButtonPressed;
             }
