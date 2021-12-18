@@ -15,7 +15,14 @@ public enum TAG
     PLAYER,
     WALL,
     NODE,
-    PICKUP
+    PICKUP,
+    ENEMY
+}
+
+public enum END_STATE
+{
+    WIN,
+    LOSE
 }
 
 namespace DemoLevel
