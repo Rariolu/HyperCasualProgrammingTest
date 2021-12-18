@@ -9,7 +9,8 @@ namespace DemoLevel
         public enum PICKUP_ITEM
         {
             COIN,
-            SPEED_BURST
+            SPEED_BURST,
+            AVOIDED
         }
 
         [SerializeField]
