@@ -15,7 +15,11 @@ public class UIScript : MonoBehaviour
         if (btnPlay != null)
         {
             //Set "PlayLevel" to run when "btnPlay" is clicked.
-            btnPlay.onClick.AddListener(() => { StartCoroutine(PlayLevel()); });
+            btnPlay.onClick.AddListener(() =>
+            {
+                GameStats.Reset();
+                StartCoroutine(PlayLevel());
+            });
         }
         else
         {
