@@ -41,7 +41,7 @@ namespace DemoLevel
                 return n1.CompareTo(n2);
             };
             PriorityQueue<MapNode> openList = new PriorityQueue<MapNode>(comparison);
-            openList.Add(start);
+            openList.Enqueue(start);
             while(openList.Count > 0)
             {
                 MapNode currentNode = openList.Dequeue();
