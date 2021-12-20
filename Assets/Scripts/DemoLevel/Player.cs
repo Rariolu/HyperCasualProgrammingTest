@@ -107,7 +107,6 @@ namespace DemoLevel
             {
                 speed = value;
                 RigidBody.velocity = currentDirVector * speed;
-                Debug.LogFormat("Speed: {0};", Speed);
             }
         }
 
