@@ -34,15 +34,14 @@ public class MapNode : MonoBehaviour
     }
 
     float[] neighbourCosts;
-    /// <summary>
-    /// The costs of travelling to each respective node.
-    /// </summary>
-    public float[] NeighbourCosts
+
+    public float GetNeighbourCost(int neighbourIndex)
     {
-        get
+        if (neighbourCosts == null)
         {
-            return neighbourCosts;
+            CalculateCosts();
         }
+        return neighbourCosts[neighbourIndex];
     }
 
     public MapPathfindingNode pathData;
@@ -56,6 +55,7 @@ public class MapNode : MonoBehaviour
         for (int i = 0; i < neighbours.Length; i++)
         {
             neighbourCosts[i] = Vector2.Distance(Position, neighbours[i].Position);
+            Debug.DrawLine(transform.position, neighbours[i].transform.position);
         }
     }
 
@@ -81,11 +81,16 @@ public class MapNode : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        CalculateCosts();
         if (Map.InstanceAvailable(out Map map))
         {
             //Reset this node's pathfinding cache when requested.
             map.PathDataReset += () => { pathData = new MapPathfindingNode(); };
+        }
+
+        SpriteRenderer sRenderer = GetComponent<SpriteRenderer>();
+        if (sRenderer != null)
+        {
+            //sRenderer.enabled = false;
         }
     }
 }
