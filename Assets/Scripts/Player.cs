@@ -108,6 +108,8 @@ public class Player : MapObject
         {DIR.UP, Vector2.up}
     };
 
+    bool hasWon = false;
+
     float slowedSpeed;
     float slowdownTimer = 0f;
 
@@ -257,7 +259,11 @@ public class Player : MapObject
     /// <returns></returns>
     IEnumerator Win()
     {
-        yield return StaticSoundManager.PlaySound(SOUND.VICTORY);
-        GameStats.Instance.EndState = END_STATE.WIN;
+        if (!hasWon)
+        {
+            hasWon = true;
+            yield return StaticSoundManager.PlaySound(SOUND.VICTORY);
+            GameStats.Instance.EndState = END_STATE.WIN;
+        }
     }
 }
