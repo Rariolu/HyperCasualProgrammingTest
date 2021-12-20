@@ -6,6 +6,7 @@ using UnityEngine;
 namespace DemoLevel
 {
     public delegate void PathDataReset();
+    [System.Obsolete("This class was used in the demo level and is not to be used outside of that scene.")]
     public class Map : MonoBehaviour
     {
         #region SingletonSetup

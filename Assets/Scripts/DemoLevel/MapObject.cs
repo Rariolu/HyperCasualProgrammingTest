@@ -3,6 +3,7 @@ using System.Collections;
 
 namespace DemoLevel
 {
+    [System.Obsolete("This class was used in the demo level and is not to be used outside of that scene.")]
     public class MapObject : MonoBehaviour
     {
         [SerializeField]

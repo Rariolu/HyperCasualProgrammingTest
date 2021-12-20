@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace DemoLevel
 {
+    [System.Obsolete("This class was used in the demo level and is not to be used outside of that scene.")]
     public class MapNode : MonoBehaviour
     {
         public Vector2 Position

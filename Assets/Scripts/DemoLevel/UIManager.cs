@@ -6,6 +6,7 @@ using UnityEngine.UI;
 namespace DemoLevel
 {
     public delegate void DirectionButtonPressed(DIR dir);
+    [System.Obsolete("This class was used in the demo level and is not to be used outside of that scene.")]
     public class UIManager : MonoBehaviour
     {
         #region SingletonSetup

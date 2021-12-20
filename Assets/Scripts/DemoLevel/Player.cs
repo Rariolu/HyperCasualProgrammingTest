@@ -6,6 +6,7 @@ namespace DemoLevel
 {
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(Rigidbody2D))]
+    [System.Obsolete("This class was used in the demo level and is not to be used outside of that scene.")]
     public class Player : MapObject
     {
         #region SingletonSetup
