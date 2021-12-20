@@ -61,6 +61,11 @@ public class GameStats
             }
         }
     }
+    
+    /// <summary>
+    /// The total quantity of speed bursts in the level.
+    /// </summary>
+    public uint BurstQuantity { get; set; }
 
     END_STATE endState;
     public END_STATE EndState
