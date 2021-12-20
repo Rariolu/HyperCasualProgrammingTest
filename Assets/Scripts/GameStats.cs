@@ -76,7 +76,7 @@ public class GameStats
     /// </summary>
     public uint BurstQuantity { get; set; }
 
-    END_STATE endState;
+    END_STATE endState = END_STATE.LOSE;
     public END_STATE EndState
     {
         get
