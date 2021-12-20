@@ -35,15 +35,6 @@ public class MapNode : MonoBehaviour
 
     float[] neighbourCosts;
 
-    public float GetNeighbourCost(int neighbourIndex)
-    {
-        if (neighbourCosts == null)
-        {
-            CalculateCosts();
-        }
-        return neighbourCosts[neighbourIndex];
-    }
-
     public MapPathfindingNode pathData;
 
     /// <summary>
@@ -78,7 +69,20 @@ public class MapNode : MonoBehaviour
         return 0;
     }
 
-    // Use this for initialization
+    /// <summary>
+    /// Get the cost of travelling from this node to a given neighbour.
+    /// </summary>
+    /// <param name="neighbourIndex"></param>
+    /// <returns></returns>
+    public float GetNeighbourCost(int neighbourIndex)
+    {
+        if (neighbourCosts == null)
+        {
+            CalculateCosts();
+        }
+        return neighbourCosts[neighbourIndex];
+    }
+    
     void Start()
     {
         if (Map.InstanceAvailable(out Map map))
