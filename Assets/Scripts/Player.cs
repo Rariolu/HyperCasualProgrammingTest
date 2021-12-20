@@ -138,6 +138,10 @@ public class Player : MapObject
         {
             GameStats.Instance.EndState = END_STATE.LOSE;
         }
+        else if (collision.gameObject.GameObjectIs(TAG.TREE))
+        {
+            GameStats.Instance.EndState = END_STATE.WIN;
+        }
     }
 
     protected override void OnTriggerEnter2D(Collider2D collision)
