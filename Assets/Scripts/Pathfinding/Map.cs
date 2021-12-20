@@ -31,7 +31,7 @@ public class Map : MonoBehaviour
     /// <returns></returns>
     public List<MapNode> GetPath(MapNode start, MapNode end)
     {
-        PathDataReset();
+        PathDataReset?.Invoke();
         List<MapNode> closedList = new List<MapNode>();
         Comparison<MapNode> comparison = (n1, n2) =>
         {
@@ -48,13 +48,21 @@ public class Map : MonoBehaviour
                 return GetFoundPath(currentNode);
             }
             MapNode[] neighbours = currentNode.Neighbours;
-            foreach (MapNode neighbour in neighbours)
+            for (int i = 0; i < neighbours.Length; i++)
+            //foreach (MapNode neighbour in neighbours)
             {
+                
+                MapNode neighbour = neighbours[i];
+                if (neighbour == currentNode)
+                {
+                    Debug.LogWarningFormat("{0} has itself for a neighbour.", currentNode.name);
+                }
                 if (closedList.Contains(neighbour))
                 {
                     continue;
                 }
-                float cost = Vector2.Distance(currentNode.Position, neighbour.Position);
+                float cost = currentNode.GetNeighbourCost(i);//.NeighbourCosts[i];//Vector2.Distance(currentNode.Position, neighbour.Position);
+                //float cost = Vector2.Distance(currentNode.Position, neighbour.Position);
                 float g = currentNode.pathData.g + cost;
                 float h = Vector2.Distance(neighbour.Position, end.Position);
                 float f = g + h;
