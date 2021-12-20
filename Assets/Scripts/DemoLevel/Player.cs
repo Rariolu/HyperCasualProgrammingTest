@@ -193,7 +193,7 @@ namespace DemoLevel
                 {
                     switch(pickupScript.ItemType)
                     {
-                        case Pickup.PICKUP_ITEM.COIN:
+                        case Pickup.PICKUP_ITEM.PRESENT:
                         {
                             Coins++;
                             break;

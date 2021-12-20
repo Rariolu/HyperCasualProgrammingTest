@@ -6,15 +6,15 @@ public class Pickup : MonoBehaviour
 {
     public enum PICKUP_ITEM
     {
-        COIN,
+        PRESENT,
         SPEED_BURST,
         AVOIDED
     }
 
     [SerializeField]
-    PICKUP_ITEM type = PICKUP_ITEM.COIN;
+    PICKUP_ITEM type = PICKUP_ITEM.PRESENT;
 
-    public PICKUP_ITEM ItemType
+    public virtual PICKUP_ITEM ItemType
     {
         get
         {

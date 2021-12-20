@@ -150,7 +150,7 @@ public class Player : MapObject
             {
                 switch (pickupScript.ItemType)
                 {
-                    case Pickup.PICKUP_ITEM.COIN:
+                    case Pickup.PICKUP_ITEM.PRESENT:
                     {
                         GameStats.Instance.Coins++;
                         break;
