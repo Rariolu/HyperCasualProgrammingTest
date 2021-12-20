@@ -45,6 +45,15 @@ public class GameStats
         }
     }
 
+    uint collectedSpeedBursts = 0;
+    public uint CollectedSpeedBursts
+    {
+        get
+        {
+            return collectedSpeedBursts;
+        }
+    }
+
     uint speedBursts;
     public uint SpeedBursts
     {
@@ -80,5 +89,10 @@ public class GameStats
 
             Util.LoadSceneWithLoading(SCENE.END);
         }
+    }
+
+    public void IncrementCollectedSpeedBursts()
+    {
+        collectedSpeedBursts++;
     }
 }
