@@ -10,7 +10,7 @@ public class UIScript : MonoBehaviour
     [SerializeField]
     Button btnQuit;
 
-    void Start()
+    protected virtual void Start()
     {
         if (btnPlay != null)
         {
