@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace DemoLevel
 {
+    /// <summary>
+    /// A queue structure which places the "highest priority" items at the front.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class PriorityQueue<T> : List<T>
     {
         Comparison<T> prioritySort;
