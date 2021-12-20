@@ -28,7 +28,8 @@ public enum END_STATE
 
 public enum SOUND
 {
-    BUTTON_CLICK
+    BUTTON_CLICK,
+    WRAPPING_PAPER
 }
 
 public enum SOUND_TYPE
