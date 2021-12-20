@@ -158,6 +158,7 @@ public class Player : MapObject
                     case Pickup.PICKUP_ITEM.SPEED_BURST:
                     {
                         GameStats.Instance.SpeedBursts++;
+                        GameStats.Instance.IncrementCollectedSpeedBursts();
                         break;
                     }
                     case Pickup.PICKUP_ITEM.AVOIDED:
