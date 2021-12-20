@@ -28,6 +28,40 @@ public class GameStats
     }
     #endregion
 
+    uint coins;
+    public uint Coins
+    {
+        get
+        {
+            return coins;
+        }
+        set
+        {
+            coins = value;
+            //if (UIManager.InstanceAvailable(out UIManager uiManager))
+            //{
+            //    uiManager.SetCoins(coins);
+            //}
+        }
+    }
+
+    uint speedBursts;
+    public uint SpeedBursts
+    {
+        get
+        {
+            return speedBursts;
+        }
+        set
+        {
+            speedBursts = value;
+            //if (UIManager.InstanceAvailable(out UIManager uIManager))
+            //{
+            //    uIManager.SetSpeedBursts(speedBursts);
+            //}
+        }
+    }
+
     END_STATE endState;
     public END_STATE EndState
     {
