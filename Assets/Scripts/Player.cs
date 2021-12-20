@@ -157,6 +157,7 @@ public class Player : MapObject
                     case Pickup.PICKUP_ITEM.PRESENT:
                     {
                         GameStats.Instance.Coins++;
+                        StaticSoundManager.PlaySoundAsync(SOUND.WRAPPING_PAPER);
                         break;
                     }
                     case Pickup.PICKUP_ITEM.SPEED_BURST:
