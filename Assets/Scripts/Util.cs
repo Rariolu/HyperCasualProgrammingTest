@@ -1,13 +1,17 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEditor;
+
 
 /// <summary>
 /// A static class full of generally useful utility functions.
 /// </summary>
 public static class Util
 {
+    static System.Random rand = new System.Random();
     public static DIR Negate(this DIR dir)
     {
         return (DIR)(-(int)dir);
@@ -22,6 +26,23 @@ public static class Util
     public static bool GameObjectIs(this GameObject gameObject, TAG tag)
     {
         return gameObject.tag.NormaliseString() == tag.NormaliseString();
+    }
+
+    /// <summary>
+    /// Return a random element from the given array.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="arr"></param>
+    /// <returns></returns>
+    public static T GetRandomElement<T>(this T[] arr)
+    {
+        if (arr.Length < 1)
+        {
+            return default(T);
+        }
+        int index = rand.Next(arr.Length);
+        Debug.LogFormat("Random index: {0}", index);
+        return arr[index];
     }
 
     /// <summary>
