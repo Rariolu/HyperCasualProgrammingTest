@@ -28,7 +28,7 @@ public enum END_STATE
 
 public enum SOUND
 {
-    TEMP
+    BUTTON_CLICK
 }
 
 public enum SOUND_TYPE
