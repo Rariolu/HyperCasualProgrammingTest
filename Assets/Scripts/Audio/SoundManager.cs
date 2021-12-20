@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class SoundManager : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class SoundManager : MonoBehaviour
     Sound[] sounds;
 
     [SerializeField]
-    UnityEngine.Audio.AudioMixer mixer;
+    AudioMixer mixer;
 
     private void Awake()
     {
