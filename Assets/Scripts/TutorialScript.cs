@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+/// <summary>
+/// A script to manage tutorials when opening the main game scene.
+/// Will only load them if they haven't previously been loaded.
+/// </summary>
 public class TutorialScript : MonoBehaviour
 {
     static bool tutorialHasPlayed = false;
