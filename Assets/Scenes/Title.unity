@@ -663,7 +663,12 @@ MonoBehaviour:
     type: 0
     volume: 1
   - name: 1
-    clip: {fileID: 8300000, guid: 51bc261e575a3b54598495b72c4a9546, type: 3}
+    clip: {fileID: 8300000, guid: 201356fa00ae03b4ab2ab1d4a7e0f955, type: 3}
+    loop: 0
+    type: 0
+    volume: 1
+  - name: 2
+    clip: {fileID: 8300000, guid: 4a22f9a790e17214bb55683704a70b41, type: 3}
     loop: 0
     type: 0
     volume: 1
