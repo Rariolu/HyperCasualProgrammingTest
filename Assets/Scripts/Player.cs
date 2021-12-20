@@ -140,10 +140,10 @@ public class Player : MapObject
         }
         else if (collision.gameObject.GameObjectIs(TAG.TREE))
         {
-            GameStats.Instance.EndState = END_STATE.WIN;
+            StartCoroutine(Win());
         }
     }
-
+    
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         base.OnTriggerEnter2D(collision);
@@ -247,5 +247,15 @@ public class Player : MapObject
             GameStats.Instance.SpeedBursts--;
             StartCoroutine(SpeedUp());
         }
+    }
+
+    /// <summary>
+    /// Play victory sound and then go to end scene.
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator Win()
+    {
+        yield return StaticSoundManager.PlaySound(SOUND.VICTORY);
+        GameStats.Instance.EndState = END_STATE.WIN;
     }
 }
