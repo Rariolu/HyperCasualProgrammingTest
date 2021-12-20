@@ -25,6 +25,17 @@ public enum END_STATE
     LOSE
 }
 
+public enum SOUND
+{
+    TEMP
+}
+
+public enum SOUND_TYPE
+{
+    SFX,
+    MUSIC
+}
+
 namespace DemoLevel
 {
     public enum DIR
