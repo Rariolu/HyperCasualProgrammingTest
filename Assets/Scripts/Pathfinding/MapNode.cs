@@ -90,7 +90,7 @@ public class MapNode : MonoBehaviour
         SpriteRenderer sRenderer = GetComponent<SpriteRenderer>();
         if (sRenderer != null)
         {
-            //sRenderer.enabled = false;
+            sRenderer.enabled = false;
         }
     }
 }
