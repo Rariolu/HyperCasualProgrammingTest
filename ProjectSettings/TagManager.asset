@@ -45,3 +45,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Scenery
+    uniqueID: 991604791
+    locked: 0
