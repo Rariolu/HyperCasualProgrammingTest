@@ -672,6 +672,16 @@ MonoBehaviour:
     loop: 0
     type: 0
     volume: 1
+  - name: 3
+    clip: {fileID: 8300000, guid: 47c7275c14e2c904bb1dd25e9b83022e, type: 3}
+    loop: 0
+    type: 0
+    volume: 1
+  - name: 4
+    clip: {fileID: 8300000, guid: c6424d942cc871848b998f6d9bb7ebc6, type: 3}
+    loop: 0
+    type: 0
+    volume: 1
   mixer: {fileID: 24100000, guid: 454288d7c77532148b64b3ad2ffa44c1, type: 2}
 --- !u!1 &977659200
 GameObject:

@@ -30,7 +30,9 @@ public enum SOUND
 {
     BUTTON_CLICK,
     WRAPPING_PAPER,
-    VICTORY
+    VICTORY,
+    EATING,
+    SICK
 }
 
 public enum SOUND_TYPE

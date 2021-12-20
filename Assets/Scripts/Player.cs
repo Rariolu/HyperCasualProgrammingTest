@@ -164,11 +164,13 @@ public class Player : MapObject
                     {
                         GameStats.Instance.SpeedBursts++;
                         GameStats.Instance.IncrementCollectedSpeedBursts();
+                        StaticSoundManager.PlaySoundAsync(SOUND.EATING);
                         break;
                     }
                     case Pickup.PICKUP_ITEM.AVOIDED:
                     {
                         StartCoroutine(SlowDown(true));
+                            StaticSoundManager.PlaySoundAsync(SOUND.SICK);
                         break;
                     }
                 }
