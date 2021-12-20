@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace DemoLevel
 {
+    [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(Rigidbody2D))]
     public class Player : MapObject
     {
