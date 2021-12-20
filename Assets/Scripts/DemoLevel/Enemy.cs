@@ -39,14 +39,12 @@ namespace DemoLevel
             while(chasing)
             {
                 MapNode target = CurrentMapNode;
-                Player player;
-                if (Player.InstanceAvailable(out player))
+                if (Player.InstanceAvailable(out Player player))
                 {
                     target = player.CurrentMapNode;
                 }
 
-                Map map;
-                if (Map.InstanceAvailable(out map))
+                if (Map.InstanceAvailable(out Map map))
                 {
                     List<MapNode> path = map.GetPath(CurrentMapNode, target);
 
