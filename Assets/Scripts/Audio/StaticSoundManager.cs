@@ -26,14 +26,24 @@ public static class StaticSoundManager
             AddSound(sound);
         }
     }
-    public static void PlaySound(SOUND name)
+    public static void PlaySoundAsync(SOUND name)
     {
         Sound sound;
         if (SoundExists(name, out sound))
         {
             GameObject soundPlayer = new GameObject();
             soundPlayer.name = string.Format("{0}_SoundPlayer", name);
-            soundPlayer.AddComponent<SoundPlayer>().PlaySound(sound, mainMixer);
+            soundPlayer.AddComponent<SoundPlayer>().PlaySoundAsync(sound, mainMixer);
+        }
+    }
+    public static IEnumerator PlaySound(SOUND name)
+    {
+        Sound sound;
+        if (SoundExists(name, out sound))
+        {
+            GameObject soundPlayer = new GameObject();
+            soundPlayer.name = string.Format("{0}_SoundPlayer", name);
+            yield return soundPlayer.AddComponent<SoundPlayer>().PlaySound(sound, mainMixer);
         }
     }
     public static bool SoundExists(SOUND name, out Sound sound)

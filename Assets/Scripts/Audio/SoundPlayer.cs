@@ -19,12 +19,12 @@ public class SoundPlayer : MonoBehaviour
         }
     }
 
-    public void PlaySound(Sound sound, AudioMixer mixer)
+    public void PlaySoundAsync(Sound sound, AudioMixer mixer)
     {
-        StartCoroutine(PlaySoundAsync(sound, mixer));
+        StartCoroutine(PlaySound(sound, mixer));
     }
 
-    IEnumerator PlaySoundAsync(Sound sound, AudioMixer mixer)
+    public IEnumerator PlaySound(Sound sound, AudioMixer mixer)
     {
         AudioSource.clip = sound.clip;
         AudioSource.loop = sound.loop;
