@@ -16,7 +16,8 @@ public enum TAG
     WALL,
     NODE,
     PICKUP,
-    ENEMY
+    ENEMY,
+    TREE
 }
 
 public enum END_STATE

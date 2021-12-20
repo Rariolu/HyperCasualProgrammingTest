@@ -8,6 +8,7 @@ TagManager:
   - Node
   - Pickup
   - Enemy
+  - Tree
   layers:
   - Default
   - TransparentFX
