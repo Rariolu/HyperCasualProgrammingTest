@@ -22,6 +22,21 @@ namespace DemoLevel
         }
         #endregion
 
+        #region Components
+
+        Animator animator;
+        Animator Animator
+        {
+            get
+            {
+                if (animator == null)
+                {
+                    return animator = GetComponent<Animator>();
+                }
+                return animator;
+            }
+        }
+
         Rigidbody2D body;
         Rigidbody2D RigidBody
         {
@@ -34,6 +49,9 @@ namespace DemoLevel
                 return body;
             }
         }
+
+        #endregion
+
         bool alreadySlowingDown = false;
 
         Dictionary<DIR, Vector2> directionVectors = new Dictionary<DIR, Vector2>()
@@ -50,9 +68,26 @@ namespace DemoLevel
         float baselineSpeed = 10f;
 
         [SerializeField]
-        Vector2 initialDirection = Vector2.left;
+        DIR initialDirection = DIR.DOWN;
+        //Vector2 initialDirection = Vector2.left;
 
-        Vector2 currentDirection;
+        Vector2 currentDirVector;
+
+        DIR currentDir;
+        DIR CurrentDirection
+        {
+            get
+            {
+                return currentDir;
+            }
+            set
+            {
+                currentDir = value;
+                currentDirVector = directionVectors[currentDir];
+                RigidBody.velocity = currentDirVector * speed;
+                Animator.SetTrigger(currentDir.ToString());
+            }
+        }
 
         [SerializeField]
         float slowdownReturnDelay = 1f;
@@ -70,7 +105,7 @@ namespace DemoLevel
             set
             {
                 speed = value;
-                RigidBody.velocity = currentDirection * speed;
+                RigidBody.velocity = currentDirVector * speed;
                 Debug.LogFormat("Speed: {0};", Speed);
             }
         }
@@ -124,19 +159,11 @@ namespace DemoLevel
             }
         }
 
-        void CheckDirPress(KeyCode keyCode, Vector2 dir)
-        {
-            if (Input.GetKey(keyCode))
-            {
-                RigidBody.velocity = dir * speed;
-                currentDirection = dir;
-            }
-        }
-
         void DirectionButtonPressed(DIR dir)
         {
-            RigidBody.velocity = directionVectors[dir] * speed;
-            currentDirection = directionVectors[dir];
+            //RigidBody.velocity = directionVectors[dir] * speed;
+            //currentDirection = directionVectors[dir];
+            CurrentDirection = dir;
         }
 
 
@@ -145,7 +172,8 @@ namespace DemoLevel
             base.OnCollisionEnter2D(collision);
             if (collision.gameObject.GameObjectIs(TAG.WALL))
             {
-                currentDirection *= -1f;
+                CurrentDirection = CurrentDirection.Negate();
+                //currentDirection *= -1f;
                 StartCoroutine(SlowDown());
             }
             else if (collision.gameObject.GameObjectIs(TAG.ENEMY))
@@ -233,8 +261,9 @@ namespace DemoLevel
         {
             base.Start();
             speed = baselineSpeed;
-            RigidBody.velocity = initialDirection * speed;
-            currentDirection = initialDirection;
+            CurrentDirection = initialDirection;
+            //RigidBody.velocity = initialDirection * speed;
+            //currentDirection = initialDirection;
 
             if (UIManager.InstanceAvailable(out UIManager uiManager))
             {
