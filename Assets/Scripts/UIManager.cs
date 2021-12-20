@@ -98,5 +98,7 @@ public class UIManager : MonoBehaviour
                 btnBurst.onClick.AddListener(() => { player.UseBurst(); });
             }
         }
+
+        SetSpeedBursts(0);
     }
 }
