@@ -48,3 +48,6 @@ TagManager:
   - name: Scenery
     uniqueID: 991604791
     locked: 0
+  - name: Character
+    uniqueID: 64401071
+    locked: 0
