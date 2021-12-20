@@ -49,9 +49,7 @@ public class Map : MonoBehaviour
             }
             MapNode[] neighbours = currentNode.Neighbours;
             for (int i = 0; i < neighbours.Length; i++)
-            //foreach (MapNode neighbour in neighbours)
             {
-                
                 MapNode neighbour = neighbours[i];
                 if (neighbour == currentNode)
                 {
@@ -61,8 +59,7 @@ public class Map : MonoBehaviour
                 {
                     continue;
                 }
-                float cost = currentNode.GetNeighbourCost(i);//.NeighbourCosts[i];//Vector2.Distance(currentNode.Position, neighbour.Position);
-                //float cost = Vector2.Distance(currentNode.Position, neighbour.Position);
+                float cost = currentNode.GetNeighbourCost(i);
                 float g = currentNode.pathData.g + cost;
                 float h = Vector2.Distance(neighbour.Position, end.Position);
                 float f = g + h;
