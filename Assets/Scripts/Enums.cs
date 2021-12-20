@@ -36,21 +36,10 @@ public enum SOUND_TYPE
     MUSIC
 }
 
-namespace DemoLevel
+public enum DIR
 {
-    public enum DIR
-    {
-        DOWN = -1,
-        LEFT = -2,
-        RIGHT = 2,
-        UP = 1
-    }
-
-    public static class DirTemp
-    {
-        public static DIR Negate(this DIR dir)
-        {
-            return (DIR)(-(int)dir);
-        }
-    }
+    DOWN = -1,
+    LEFT = -2,
+    RIGHT = 2,
+    UP = 1
 }

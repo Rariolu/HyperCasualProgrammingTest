@@ -8,6 +8,11 @@ using UnityEditor;
 /// </summary>
 public static class Util
 {
+    public static DIR Negate(this DIR dir)
+    {
+        return (DIR)(-(int)dir);
+    }
+
     /// <summary>
     /// Check if the gameobject has the given tag.
     /// </summary>
