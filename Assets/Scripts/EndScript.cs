@@ -23,7 +23,7 @@ public class EndScript : UIScript
             uint collectedBursts = GameStats.Instance.CollectedSpeedBursts;
             uint totalBursts = GameStats.Instance.BurstQuantity;
             uint burstsRemaining = totalBursts - GameStats.Instance.CollectedSpeedBursts;
-            float mult = (float)burstsRemaining / (float)totalBursts;
+            float mult = (float)collectedBursts / (float)totalBursts;
 
             int points = Mathf.RoundToInt(mult * coins);
 
