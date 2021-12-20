@@ -38,10 +38,10 @@ public class GameStats
         set
         {
             coins = value;
-            //if (UIManager.InstanceAvailable(out UIManager uiManager))
-            //{
-            //    uiManager.SetCoins(coins);
-            //}
+            if (UIManager.InstanceAvailable(out UIManager uiManager))
+            {
+                uiManager.SetCoins(coins);
+            }
         }
     }
 
@@ -55,10 +55,10 @@ public class GameStats
         set
         {
             speedBursts = value;
-            //if (UIManager.InstanceAvailable(out UIManager uIManager))
-            //{
-            //    uIManager.SetSpeedBursts(speedBursts);
-            //}
+            if (UIManager.InstanceAvailable(out UIManager uIManager))
+            {
+                uIManager.SetSpeedBursts(speedBursts);
+            }
         }
     }
 
