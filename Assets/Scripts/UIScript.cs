@@ -39,7 +39,7 @@ public class UIScript : MonoBehaviour
 
     IEnumerator PlayLevel()
     {
-        yield return 0;
+        yield return StaticSoundManager.PlaySound(SOUND.BUTTON_CLICK);
         Util.LoadSceneWithLoading(SCENE.GAME);
     }
 
@@ -49,7 +49,8 @@ public class UIScript : MonoBehaviour
     /// <returns></returns>
     IEnumerator Quit()
     {
-        yield return 0;
+
+        yield return StaticSoundManager.PlaySound(SOUND.BUTTON_CLICK);
         Util.Quit();
     }
 }
