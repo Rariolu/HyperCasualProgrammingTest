@@ -13,7 +13,7 @@ public class MapObject : MonoBehaviour
 
     MapNode currentNode;
     /// <summary>
-    /// The map node that best represents the player's current position.
+    /// The map node that best represents the object's current position.
     /// </summary>
     public MapNode CurrentMapNode
     {
